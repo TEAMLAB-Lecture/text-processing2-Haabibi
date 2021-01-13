@@ -28,7 +28,13 @@ def digits_to_words(input_string):
             >>> tp2.digits_to_words(digits_str2)
             'three one four one five'
     """
-    digit_string = None
+    digit_mapping = {'0': 'zero', '1': 'one', '2': 'two', '3': 'three', '4': 'four', '5':'five', '6':'six', '7':'seven', '8':'eight', '9':'nine', '10':'ten'}
+    
+    digit_string = []
+    for char in input_string:
+        if char in digit_mapping.keys():
+            digit_string.append(digit_mapping[char])
+    digit_string = ' '.join(digit_string)
     return digit_string
 
 
@@ -61,5 +67,17 @@ def to_camel_case(underscore_str):
             >>> tp2.to_camel_case(underscore_str2)
             'exampleName'
     """
-    camelcase_str = None
-    return camelcase_str
+    name_parts = underscore_str.split('_')
+    if len(name_parts) == 1:
+        return underscore_str
+    else:
+        while ('' in name_parts):
+            name_parts.remove('')
+        for i in range(len(name_parts)):
+            name_parts[i] = name_parts[i].lower()
+            if i > 0 :
+                print(i, name_parts)
+                name_parts[i] = name_parts[i].replace(name_parts[i][0], name_parts[i][0].upper())
+        camelcase_str = ''.join(name_parts)
+
+        return camelcase_str
